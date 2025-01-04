@@ -1,9 +1,9 @@
 {
   "name": "create-expg-server",
-  "version": "1.0.2",
-  "main": "create-expg-app.js",
+  "version": "1.0.3",
+  "main": "create-expg-server.js",
   "bin": {
-    "create-tt-express-app": "./create-express-app.js"
+    "create-expg-server": "./create-express-server.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
