@@ -1,16 +1,31 @@
 {
-  "name": "create-expg-app",
+  "name": "create-expg-server",
   "version": "1.0.0",
   "main": "create-expg-app.js",
   "bin": {
-    "create-tt-express-app": "./create-expg-app.js"
+    "create-tt-express-app": "./create-express-app.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "express",
+    "cli",
+    "create-app",
+    "postgresql",
+    "jest",
+    "scaffolding"
+  ],
+  "author": "Your Name <your_email@example.com>",
   "license": "ISC",
-  "type": "commonjs",
-  "description": ""
+  "description": "A CLI tool to quickly scaffold an Express.js app with PostgreSQL and Jest.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TTibbs/create-expg-app.git"
+  },
+  "homepage": "https://github.com/TTibbs/create-expg-app#readme",
+  "bugs": {
+    "url": "https://github.com/TTibbs/create-expg-app/issues"
+  },
+  "type": "commonjs"
 }
