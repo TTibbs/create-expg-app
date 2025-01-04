@@ -1,6 +1,6 @@
 {
   "name": "create-expg-server",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "create-expg-server.js",
   "bin": {
     "create-expg-server": "./create-expg-server.js"

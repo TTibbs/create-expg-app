@@ -78,7 +78,9 @@ node_modules/
   },
   "scripts": {
     "start": "node listener.js",
-    "dev": "nodemon listener.js",
+    "setup-dbs": "psql -f db/setup.sql",
+    "seed": "node db/seeds/run-seed.js",
+    "seed-prod": "NODE_ENV=production npm run seed",
     "test": "jest"
   },
   "dependencies": {
@@ -255,9 +257,12 @@ exports.serverErrorHandler = (err, req, res, next) => {
 };
 `,
     ".env.production": "DATABASE_URL=your_production_db_url",
-    ".env.test": "DATABASE_URL=your_test_db_url",
-    ".env.development": "DATABASE_URL=your_development_db_url",
-    ".env-example": "DATABASE_URL=your_db_url",
+    ".env.test": "PGDATABASE=your_test_db_name",
+    ".env.development": "PGDATABASE=your_db_name",
+    ".env-example": `PGDATABASE=your_db_name
+PGDATABASE=your_test_db_name
+DATABASE_URL=your_production_db_url
+`,
   };
 
   // Create the folder structure and files
