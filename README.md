@@ -1,4 +1,4 @@
-# create-express-app
+# create-express-server
 
 A CLI tool to quickly scaffold an Express.js app with PostgreSQL and Jest.
 
@@ -7,7 +7,7 @@ A CLI tool to quickly scaffold an Express.js app with PostgreSQL and Jest.
 To install this package globally, run:
 
 ```bash
-npm install -g create-express-app
+npm install -g create-express-server
 ```
 
 ## Usage
@@ -15,5 +15,5 @@ npm install -g create-express-app
 After installation, you can create a new Express app by running:
 
 ```bash
-create-express-app <project-name>
+create-express-server <project-name>
 ```
