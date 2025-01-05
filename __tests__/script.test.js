@@ -6,7 +6,7 @@ jest.mock("fs");
 jest.mock("child_process");
 jest.mock("readline", () => ({
   createInterface: jest.fn().mockReturnValue({
-    question: jest.fn((_, callback) => callback("GitHub Copilot")),
+    question: jest.fn((_, callback) => callback("Hello, World!")),
     close: jest.fn(),
   }),
 }));
@@ -15,18 +15,16 @@ const {
   initializeGitRepo,
   askQuestion,
 } = require("../create-expg-server");
-const { create } = require("domain");
+
+beforeEach(() => {
+  jest.clearAllMocks();
+});
 
 describe("File and Folder Creation", () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
   test("creates a folder if the path ends with '/'", () => {
     const folderPath = "/";
     const content = "";
     createFileOrFolder(folderPath, content);
-
     expect(fs.mkdirSync).toHaveBeenCalledWith(path.resolve(folderPath), {
       recursive: true,
     });
@@ -92,7 +90,6 @@ describe("initializeGitRepo", () => {
   test("initialises a git repository", () => {
     const targetPath = "/path/to/project";
     initializeGitRepo(targetPath);
-
     expect(execSync).toHaveBeenCalledWith("git init", {
       cwd: targetPath,
       stdio: "inherit",
@@ -111,7 +108,7 @@ describe("askQuestion", () => {
   });
 
   test("resolves with the user's input", async () => {
-    const answer = "GitHub Copilot";
+    const answer = "Hello, World!";
     rl.question.mockImplementation((_, callback) => {
       callback(answer);
     });

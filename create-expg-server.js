@@ -60,7 +60,15 @@ node_modules/
 
   // Get the project name
   const projectName = await askQuestion("Project name: ");
-  const targetPath = path.resolve(projectName);
+  const authorName = await askQuestion("Author name: ");
+  const hasGitHubRepo = (
+    await askQuestion("Do you have a GitHub repository? (y/n) ")
+  ).toLowerCase();
+  let repoUrl = "";
+  if (hasGitHubRepo === "y") {
+    repoUrl = await askQuestion("GitHub repository URL: ");
+  }
+  const targetPath = path.resolve(projectName, authorName);
 
   // Create the project folder
   console.log(`Creating project directory at ${targetPath}...`);
@@ -70,17 +78,20 @@ node_modules/
   const structure = {
     "package.json": `{
   "name": "${projectName}",
-  "author": "your_name",
+  "author": "${authorName}",
   "version": "1.0.0",
   "description": "Express app",
   "main": "listener.js",
   "repository": {
     "type": "git",
-    "url": "your_repo_url"
+    "url": "git+${repoUrl}.git"
   },
   "bugs": {
-    "url": "your_github_issues_url"
+    "url": "${repoUrl}/issues"
   },
+  "homepage": "${repoUrl}#readme",
+  "keywords": [],
+  "license": "MIT",
   "scripts": {
     "start": "node listener.js",
     "setup-dbs": "psql -f db/setup.sql",
