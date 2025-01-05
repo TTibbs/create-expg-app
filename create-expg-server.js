@@ -24,6 +24,11 @@ function createFileOrFolder(filePath, content = "") {
   const fullPath = path.resolve(filePath);
   const isDirectory = fullPath.endsWith("/") || fullPath.endsWith(path.sep);
 
+  if (fs.existsSync(fullPath)) {
+    console.log(`File or folder already exists at ${fullPath}`);
+    return;
+  }
+
   if (isDirectory) {
     fs.mkdirSync(fullPath, { recursive: true });
   } else {
@@ -281,3 +286,5 @@ DATABASE_URL=your_production_db_url
 
   console.log(`\nSuccess! Your Express app is ready at ${targetPath}`);
 })();
+
+module.exports = { askQuestion, createFileOrFolder, initializeGitRepo };
