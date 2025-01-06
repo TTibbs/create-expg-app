@@ -14,7 +14,7 @@ const {
   createFileOrFolder,
   initializeGitRepo,
   askQuestion,
-} = require("../create-expg-server");
+} = require("../dist/create-expg-server");
 
 beforeEach(() => {
   jest.clearAllMocks();

@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
-const fs = require("fs");
-const path = require("path");
-const { execSync } = require("child_process");
-const readline = require("readline");
+import * as fs from "fs";
+import * as path from "path";
+import { execSync } from "child_process";
+import * as readline from "readline";
 
 // CLI prompt for user input
-function askQuestion(query) {
+function askQuestion(query: string): Promise<string> {
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
@@ -20,7 +20,7 @@ function askQuestion(query) {
 }
 
 // Helper to create a file or folder
-function createFileOrFolder(filePath, content = "") {
+function createFileOrFolder(filePath: string, content: string = ""): void {
   const fullPath = path.resolve(filePath);
   const isDirectory = fullPath.endsWith("/") || fullPath.endsWith(path.sep);
 
@@ -38,7 +38,7 @@ function createFileOrFolder(filePath, content = "") {
 }
 
 // Initialize Git Repository
-function initializeGitRepo(targetPath) {
+function initializeGitRepo(targetPath: string): void {
   console.log("Initializing git repository...");
   execSync("git init", { cwd: targetPath, stdio: "inherit" });
 
@@ -55,27 +55,27 @@ node_modules/
 }
 
 // Main script
-(async function main() {
-  console.log("Welcome to create-express-app!");
+(async function main(): Promise<void> {
+  console.log("Welcome to create-expg-server!");
 
   // Get the project name
-  const projectName = await askQuestion("Project name: ");
-  const authorName = await askQuestion("Author name: ");
-  const hasGitHubRepo = (
+  const projectName: string = await askQuestion("Project name: ");
+  const authorName: string = await askQuestion("Author name: ");
+  const hasGitHubRepo: string = (
     await askQuestion("Do you have a GitHub repository? (y/n) ")
   ).toLowerCase();
-  let repoUrl = "";
+  let repoUrl: string = "";
   if (hasGitHubRepo === "y") {
     repoUrl = await askQuestion("GitHub repository URL: ");
   }
-  const targetPath = path.resolve(projectName, authorName);
+  const targetPath: string = path.resolve(projectName);
 
   // Create the project folder
   console.log(`Creating project directory at ${targetPath}...`);
   fs.mkdirSync(targetPath, { recursive: true });
 
   // Define the folder and file structure
-  const structure = {
+  const structure: { [key: string]: string } = {
     "package.json": `{
   "name": "${projectName}",
   "author": "${authorName}",
@@ -288,8 +288,12 @@ DATABASE_URL=your_production_db_url
   }
 
   // Initialize Git repository
-  initializeGitRepo(targetPath);
-  execSync("git branch -M main", { cwd: targetPath, stdio: "inherit" });
+  if (hasGitHubRepo === "y") {
+    console.log("GitHub repository already exists.");
+  } else {
+    initializeGitRepo(targetPath);
+    execSync("git branch -M main", { cwd: targetPath, stdio: "inherit" });
+  }
 
   // Install dependencies
   console.log("Installing dependencies...");
