@@ -1,6 +1,6 @@
 {
   "name": "create-expg-server",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "main": "./dist/create-expg-server.js",
   "bin": {
     "create-expg-server": "./dist/create-expg-server.js"
@@ -33,7 +33,7 @@
     "type": "git",
     "url": "https://github.com/TTibbs/create-expg-app.git"
   },
-  "homepage": "https://github.com/TTibbs/create-expg-app#readme",
+  "homepage": "https://cexpgs.vercel.app/",
   "bugs": {
     "url": "https://github.com/TTibbs/create-expg-app/issues"
   },
